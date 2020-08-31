@@ -16,7 +16,11 @@
         &nbsp;
     {{ user }}
     <br/>
-    <a href="{% url "password_change" %}"> click here change your password </a>
+{#            <form action="{% url 'login' %}" method="post"></form>#}
+        <a href="{% url 'login' %}"> click here to Login or Register </a>
+
+
+{#    <a href="{% url "password_change" %}"> click here change your password </a>#}
 
 {% endblock content %}
 
