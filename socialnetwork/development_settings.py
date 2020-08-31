@@ -151,13 +151,5 @@ AUTHENTICATION_BACKENDS = [
 
 ]
 
-SOCIAL_AUTH_FACEBOOK_KEY = '310314493530262'  # Facebook App ID
-SOCIAL_AUTH_FACEBOOK_SECRET = '49c30c2689266377af18e459fe81449f'  # Facebook App Secret
-SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
-
-SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '327685351216-se62914qhq097lapa1ja2qe321rb9ro4.apps.googleusercontent.com'  # Google
-# Consumer Key
-SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = '6jt6fsWhcKrZ_quqJZ-GoZmM'  # Google Consumer Secret
-
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
