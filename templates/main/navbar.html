@@ -91,7 +91,7 @@
     <ul class="navbar-nav mr-auto">
       <li class="nav-item active">
              {% if request.user.is_authenticated %}
-            <a class="nav-link" href="{% url "home-view" %}">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="{% url "home-view" %}"> Home <span class="sr-only">(current)</span></a>
                {% endif %}
       </li>
 
@@ -115,12 +115,12 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" href="{% url "profiles:all-profiles-view" %}"> All Profiles</a>
-          <a class="dropdown-item" href="#"> Send Invites</a>
+          <a class="dropdown-item" href="{% url "profiles:all-profiles-view" %}"> Send Invites</a>
           <div class="dropdown-divider"></div>
-          <a class="dropdown-item" href="#"> Received Invites</a>
+          <a class="dropdown-item" href="{% url "profiles:my_invites_view" %}"> Received Invites</a>
         </div>
       </li>
-          {% endif %}
+
      </div>
       <li class="nav-item">
         <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
@@ -131,6 +131,19 @@
       <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
   </div>
+             <br>
+              <a href="" class="item">
+                 {{ request.user }}
+            </a>
+             <br>
+            <a href="{% url "logout" %}" class="ui item">
+                Logout
+            </a>
+        {% else %}
+        <a href="{% url "login" %}" class="ui item">
+                Login
+            </a>
+        {% endif %}
 </nav>
 
 </body>

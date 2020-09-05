@@ -89,32 +89,31 @@ def profiles_list_view(request):
 
 
 class ProfileDetailView(DetailView):
-    pass
-    # model = Profile
-    # template_name = 'profiles/detail.html'
-    #
-    # def get_object(self, slug=None):
-    #     slug = self.kwargs.get('slug')
-    #     profile = Profile.objects.get(slug=slug)
-    #     return profile
+    model = Profile
+    template_name = 'profiles/detail.html'
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     user = User.objects.get(username__iexact=self.request.user)
-    #     profile = Profile.objects.get(user=user)
-    #     rel_r = Relationship.objects.filter(sender=profile)
-    #     rel_s = Relationship.objects.filter(receiver=profile)
-    #     rel_receiver = []
-    #     rel_sender = []
-    #     for item in rel_r:
-    #         rel_receiver.append(item.receiver.user)
-    #     for item in rel_s:
-    #         rel_receiver.append(item.sender.user)
-    #     context["rel_receiver"] = rel_receiver
-    #     context["rel_sender"] = rel_sender
-    #     context['posts'] = self.get_object().get_all_authors_posts()
-    #     context['len_posts'] = True if len(self.get_object().get_all_authors_posts()) > 0 else False
-    #     return context
+    def get_object(self, slug=None):
+        slug = self.kwargs.get('slug')
+        profile = Profile.objects.get(slug=slug)
+        return profile
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = User.objects.get(username__iexact=self.request.user)
+        profile = Profile.objects.get(user=user)
+        rel_r = Relationship.objects.filter(sender=profile)
+        rel_s = Relationship.objects.filter(receiver=profile)
+        rel_receiver = []
+        rel_sender = []
+        for item in rel_r:
+            rel_receiver.append(item.receiver.user)
+        for item in rel_s:
+            rel_receiver.append(item.sender.user)
+        context["rel_receiver"] = rel_receiver
+        context["rel_sender"] = rel_sender
+        context['posts'] = self.get_object().get_all_authors_posts()
+        context['len_posts'] = True if len(self.get_object().get_all_authors_posts()) > 0 else False
+        return context
 
 
 class ProfileListView(ListView):
