@@ -71,7 +71,7 @@ def register(request):
 
             # Profile.objects.create(user=new_user)
 
-            return render(request, 'register_done.html', {'new_user': new_user})
+            return render(request, 'registation/register_done.html', {'new_user': new_user})
 
     else:
         user_form = UserRegistrationForm()

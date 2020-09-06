@@ -12,8 +12,9 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import django_heroku
 import os
+import cloudinary
 import environ
-from decouple import config
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 
 
@@ -36,8 +37,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'account.apps.AccountConfig',
+    'whitenoise.runserver_nostatic',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -46,7 +47,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'social_django',
     'django_extensions',
-    'cloudinary_storage',
+    'cloudinary',
 
     'posts',
     'profiles',
@@ -156,9 +157,14 @@ AUTHENTICATION_BACKENDS = [
 # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': config("CLOUDINARY_CLOUD_NAME"),
-    'API_KEY': config("CLOUDINARY_API_KEY"),
-    'API_SECRET': config("CLOUDINARY_API_SECRET"),
+cloudinary.config(
+    CLOUD_NAME=['CLOUD_NAME'],
+    API_KEY=['API_KEY'],
+    API_SECRET=['API_SECRET'],
+)
 
-}
+# cloudinary.config(
+#     cloud_name=CLOUDINARY_CLOUD_NAME,
+#     api_key=CLOUDINARY_API_KEY,
+#     api_secret=CLOUDINARY_API_SECRET
+# )

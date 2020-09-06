@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Search
+{% endblock title %}
+
+{% block content %}
+    {% if query %}
+        <h1>Names containing "{{ query }}"</h1>
+        <h3>
+        {% with results.count as total_results %}
+        Found{{ total_results }} results {{ total_results |capfirst }}
+        {% endwith %}
+        </h3>
+        {% for name in results %}
+        <h4><a href="{{ profiles.get_absolute_url }}">{{ profiles.title }}</a></h4>
+        {{ profiles.body|markdown|truncatewords_html:5 }}
+        {% empty %}
+            <p> There is no results for your query. </p>
+        {% endfor %}
+            <p><a href="{% profiles: myprofile.html %}">Search again</a></p>
+        {% else %}
+        <h1>Search for posts</h1>
+            <form method="get">
+                {{ form.as_p }}
+                <input type="submit" value="search">
+            </form>
+    {% endif %}
+{% endblock content  %}

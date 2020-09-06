@@ -1,9 +1,13 @@
 from django.shortcuts import render, redirect, get_object_or_404
+
+from posts.models import Post
 from .models import Profile, Relationship
 from .forms import ProfileModelForm
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.models import User
 from django.db.models import Q
+from django.contrib.postgres.search import SearchVector
+from .forms import SearchForm  # CommentForm,
 
 
 # Create your views here.
@@ -173,3 +177,20 @@ def remove_from_friends(request):
         rel.delete()
         return redirect(request.META.get('HTTP_REFERER'))
     return redirect('profiles:my_profile_view')
+
+
+def post_search(request):
+    form = SearchForm()
+    query = None
+    results = []
+    if 'query' in request.GET:
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['query']
+            results = Post.published.annotate(
+                search=SearchVector('title', 'body'),
+            ).filter(search=query)
+    return render(request, 'profiles/search.html',
+                  {'form': form,
+                   'query': query,
+                   'results': results})
