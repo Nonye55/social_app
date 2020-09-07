@@ -1,5 +1,6 @@
 from django.core.validators import FileExtensionValidator
 from django.db import models
+from cloudinary.models import CloudinaryField
 
 from profiles.models import Profile
 
@@ -7,8 +8,8 @@ from profiles.models import Profile
 # Create your models here.
 class Post(models.Model):
     content = models.TextField()
-    image = models.ImageField(
-        upload_to='posts',
+    image = CloudinaryField(
+        'posts',
         validators=[FileExtensionValidator(['png', 'jpeg', 'jpg', 'MP4', 'AVI*', 'MP3'])],
         blank=True
     )

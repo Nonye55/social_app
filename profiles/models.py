@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from .utils import get_random_code
 from django.template.defaultfilters import slugify
 from django.db.models import Q
+from cloudinary.models import CloudinaryField
 
 
 # Create your models here.
@@ -40,7 +41,7 @@ class Profile(models.Model):
     bio = models.TextField(default="no_bio...", max_length=300)
     email = models.EmailField(max_length=200, blank=True)
     country = models.CharField(max_length=200, blank=True)
-    avatar = models.ImageField(default='avatar.png', upload_to='avatars/')
+    avatar = CloudinaryField('avatars/', default='avatar.png')
     friends = models.ManyToManyField(User, blank=True, related_name='friends')
     slug = models.SlugField(unique=True, blank=True)
     updated = models.DateTimeField(auto_now=True)

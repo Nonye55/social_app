@@ -134,11 +134,11 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static_project')
 ]
 
-# STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
+STATIC_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "static_root")
 
 MEDIA_URL = '/media/'
-DEFAULT_FILE_STORAGE = 'cloudinary.MediaCloudinary'
-# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
+# DEFAULT_FILE_STORAGE = 'cloudinary.MediaCloudinary'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "static_cdn", "media_root")
 
 LOGIN_REDIRECT_URL = 'dashboard'
 LOGIN_URL = 'login'
