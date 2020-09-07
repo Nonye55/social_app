@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/fontawesome.min.css">
 </head>
 <body>
 {% extends "base.html" %}
@@ -25,15 +26,18 @@
         {% endif %}
             <div class="social">
                 <ul>
-                <li class="facebook">
+{#                <li class="facebook">#}
+                    <i class="fab fa-facebook"></i>
+                    {#                    <li class="fa fa-facebook-official" aria-hidden="true">#}
                 <a href="{% url "social:begin" "facebook" %}">Sign in with
                 Facebook</a>
-                </li>
+                    </i>
+{#                </li>#}
                 </ul>
 
             <ul>
         <li class="google">
-        <a href="{% url "social:begin" "google-oauth2" %}">Login with
+        <a href="{% url "social:begin" "google-oauth2" %}">Sign with
         Google</a>
         </li>
             </ul>

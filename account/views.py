@@ -15,7 +15,9 @@ from .forms import LoginForm, UserRegistrationForm
 def user_login(request):
     if request.method == 'POST':
         form = LoginForm(request.POST)
+        print(form)
         if form.is_valid():
+            print(form.cleaned_data)
             cd = form.cleaned_data
             user = authenticate(request,
                                 username=cd['username'],
@@ -60,18 +62,18 @@ def register(request):
             # Create a new user object but avoid saving it yet
 
             new_user = user_form.save(commit=False)
-            # Set the chosen password
 
+            # Set the chosen password
             new_user.set_password(
                 user_form.cleaned_data['password'])
+
             # Save the User object
-
             new_user.save()
-            # Create the user profile
 
+            # Create the user profile
             # Profile.objects.create(user=new_user)
 
-            return render(request, 'registation/register_done.html', {'new_user': new_user})
+            return render(request, 'register_done.html', {'new_user': new_user})
 
     else:
         user_form = UserRegistrationForm()
